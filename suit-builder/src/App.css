@@ -1,0 +1,199 @@
+.app {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.app-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.stark-logo {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arc-reactor {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at center, 
+      var(--stark-blue) 0%, 
+      var(--stark-blue-dark) 30%, 
+      transparent 70%);
+  border: 2px solid var(--stark-blue);
+  position: relative;
+  animation: glow 3s ease-in-out infinite;
+}
+
+.arc-reactor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--stark-blue);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 
+    0 0 10px var(--stark-blue),
+    0 0 20px var(--neon-blue);
+}
+
+.arc-reactor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.app-layout {
+  padding-top: 90px;
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 90px);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.viewer-container {
+  flex: 2;
+  min-height: 70vh;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.control-panels {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+}
+
+.holographic-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, transparent 48%, rgba(0, 212, 255, 0.03) 49%, rgba(0, 212, 255, 0.03) 51%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(255, 215, 0, 0.03) 49%, rgba(255, 215, 0, 0.03) 51%, transparent 52%);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -1;
+  animation: holographicShift 8s linear infinite;
+}
+
+.scanning-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(0, 212, 255, 0.15) 1px, transparent 0);
+  background-size: 100px 100px;
+  pointer-events: none;
+  z-index: -1;
+  animation: scanningMove 12s linear infinite;
+}
+
+@keyframes holographicShift {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(5px) translateY(-5px); }
+  50% { transform: translateX(-3px) translateY(3px); }
+  75% { transform: translateX(2px) translateY(-2px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes scanningMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(100px, 100px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .main-content {
+    flex-direction: column;
+  }
+  
+  .control-panels {
+    flex-direction: row;
+    max-width: none;
+    overflow-x: auto;
+  }
+  
+  .viewer-container {
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 15px 20px;
+  }
+  
+  .app-title {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+  
+  .stark-logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .arc-reactor {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .main-content {
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  .control-panels {
+    gap: 15px;
+  }
+}
