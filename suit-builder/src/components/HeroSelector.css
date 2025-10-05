@@ -1,0 +1,241 @@
+.hero-selector {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+  border: 2px solid var(--stark-blue);
+  overflow: hidden;
+}
+
+.hero-selector.expanded {
+  width: 350px;
+}
+
+.selector-toggle {
+  width: 100%;
+  padding: 15px 10px;
+  background: linear-gradient(145deg, rgba(0, 212, 255, 0.1), rgba(0, 0, 0, 0.8));
+  border: none;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+  color: var(--stark-white);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.selector-toggle:hover {
+  background: linear-gradient(145deg, rgba(0, 212, 255, 0.2), rgba(0, 0, 0, 0.9));
+  box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.heroes-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.hero-selector.expanded .heroes-list {
+  max-height: 600px;
+}
+
+.hero-card {
+  position: relative;
+  padding: 20px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-card:hover {
+  transform: translateX(5px);
+  border-color: var(--stark-blue);
+  box-shadow: 
+    0 5px 20px rgba(0, 212, 255, 0.3),
+    inset 0 0 10px rgba(0, 212, 255, 0.1);
+}
+
+.hero-card.selected {
+  border-color: var(--stark-blue);
+  background: rgba(0, 212, 255, 0.1);
+  transform: translateX(10px);
+}
+
+.hero-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.hero-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.hero-info {
+  margin-bottom: 15px;
+}
+
+.hero-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  letter-spacing: 1px;
+}
+
+.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  color: var(--stark-gold);
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.hero-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.hero-status {
+  text-align: center;
+}
+
+.status-active {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.status-ready {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 1px;
+}
+
+.selection-glow {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--stark-blue), var(--stark-gold), var(--stark-blue));
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0.6;
+  animation: rotateGlow 3s linear infinite;
+}
+
+.selector-footer {
+  padding: 15px;
+  border-top: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.power-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+}
+
+.power-label {
+  color: var(--stark-white);
+  font-weight: 600;
+}
+
+.power-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.power-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--stark-blue), var(--stark-gold));
+  animation: powerPulse 2s ease-in-out infinite;
+}
+
+.power-value {
+  font-weight: 700;
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes powerPulse {
+  0%, 100% { 
+    box-shadow: 0 0 5px var(--stark-blue); 
+  }
+  50% { 
+    box-shadow: 0 0 15px var(--stark-blue), 0 0 25px var(--neon-blue); 
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-selector {
+    position: fixed;
+    left: 10px;
+    top: auto;
+    bottom: 20px;
+    transform: none;
+    width: 60px;
+  }
+  
+  .hero-selector.expanded {
+    width: calc(100vw - 40px);
+    left: 20px;
+    right: 20px;
+  }
+  
+  .heroes-list {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px;
+  }
+  
+  .hero-card {
+    min-width: 200px;
+    margin: 0;
+  }
+  
+  .selector-toggle {
+    padding: 12px 8px;
+    font-size: 0.7rem;
+  }
+  
+  .toggle-icon {
+    font-size: 1rem;
+  }
+}

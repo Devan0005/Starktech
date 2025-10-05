@@ -1,0 +1,202 @@
+.loading-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.loading-container {
+  text-align: center;
+  position: relative;
+}
+
+.arc-reactor-loader {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.reactor-core {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, var(--stark-blue), var(--stark-blue-dark));
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 
+    0 0 20px var(--stark-blue),
+    0 0 40px var(--neon-blue);
+  animation: reactorPulse 2s ease-in-out infinite;
+}
+
+.reactor-ring {
+  position: absolute;
+  border: 2px solid var(--stark-blue);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
+}
+
+.ring-1 {
+  width: 60px;
+  height: 60px;
+  animation: reactorSpin 3s linear infinite;
+}
+
+.ring-2 {
+  width: 80px;
+  height: 80px;
+  animation: reactorSpin 4s linear infinite reverse;
+}
+
+.ring-3 {
+  width: 100px;
+  height: 100px;
+  animation: reactorSpin 5s linear infinite;
+  border-color: var(--stark-gold);
+}
+
+.loading-text h2 {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  letter-spacing: 2px;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  color: var(--stark-blue);
+  font-size: 1.2rem;
+}
+
+.loading-status {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.scan-lines {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 212, 255, 0.1) 2px,
+    rgba(0, 212, 255, 0.1) 4px
+  );
+  animation: scanMove 3s linear infinite;
+  pointer-events: none;
+}
+
+.holographic-grid {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  right: -100px;
+  bottom: -100px;
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: gridFloat 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes reactorPulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 
+      0 0 20px var(--stark-blue),
+      0 0 40px var(--neon-blue);
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 
+      0 0 30px var(--stark-blue),
+      0 0 60px var(--neon-blue),
+      0 0 80px rgba(0, 212, 255, 0.3);
+  }
+}
+
+@keyframes reactorSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes scanMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes gridFloat {
+  0%, 100% { 
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translate(10px, -10px) rotate(2deg);
+    opacity: 0.6;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .arc-reactor-loader {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .reactor-core {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .ring-1 {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .ring-2 {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .ring-3 {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .loading-text h2 {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+  
+  .loading-status {
+    font-size: 0.8rem;
+  }
+}
